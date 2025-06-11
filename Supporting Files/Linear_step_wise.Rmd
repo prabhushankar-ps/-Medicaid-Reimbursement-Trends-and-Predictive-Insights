@@ -1,0 +1,52 @@
+---
+title: "Untitled"
+author: "Prabhu Shankar"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(caret)
+
+```
+
+
+```{r}
+data <- read.csv('/Users/prabhushankar/Desktop/whole_dataset.csv')
+head(data)
+```
+
+
+```{r}
+data$Year <- as.factor(data$Year)
+data$Region <- as.factor(data$Region)
+```
+
+
+
+```{r}
+full_model <- lm(Units.Reimbursed ~ population.estimates..Scaled. + personal.income..Scaled. + GDP.per.state..Scaled. + poverty.index..Scaled. + Temp.Index..Scaled. + Non.Medicaid.Amount.Reimbursed..Scaled. + Medicaid.Amount.Reimburse..Scaled. + Number.of.Prescriptions..Scaled. + Total.Amount.Reimbursed..Scaled., data)
+summary(full_model)
+```
+
+
+
+
+
+
+```{r}
+stepwise_model <- step(full_model, direction = "both")
+
+# View the summary
+summary(stepwise_model)
+```
+
+
+
+
+
+
+
+
+
